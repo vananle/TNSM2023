@@ -1,0 +1,12 @@
+data
+logs
+results
+venv
+lib
+var
+build
+
+.idea
+.spyderproject
+.spyproject
+.python-version
