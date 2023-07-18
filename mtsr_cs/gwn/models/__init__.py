@@ -1,1 +1,0 @@
-from .gwn import GWNet
