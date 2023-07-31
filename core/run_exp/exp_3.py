@@ -3,7 +3,7 @@ import sys
 
 from joblib import Parallel, delayed
 
-sys.path.append('../../../')
+sys.path.append('../../')
 
 from core.run_exp.run_exp import *
 
