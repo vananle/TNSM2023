@@ -520,7 +520,7 @@ def exp_8():
                     args.val_batch_size = 32
 
                     args = utils.args_adjust(args)
-                    args.test = True
+                    args.test = False
                     args.te_alg = 'srls'
                     args.timeout = 1
                     metrics, mlu, rc = run_exp(args)
@@ -697,12 +697,12 @@ def exp_10():
     print('Date&Time: ', date.today())
 
 
-exp_1()
+# exp_1()
 # exp_2()
 # exp_3()
 # exp_4()
 # exp_5()
 # exp_6()
 # exp_7()
-# exp_8()
+exp_8()
 # exp_12()
