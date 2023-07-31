@@ -22,7 +22,7 @@ def get_args():
     # parameter for dataset
     parser.add_argument('--seed', type=int, default=1)
     parser.add_argument('--dataset', type=str, default='abilene',
-                        choices=['abilene', 'geant', 'sdn', 'germany'],
+                        choices=['abilene', 'geant', 'sdn', 'germany', 'gnnet-40'],
                         help='Dataset, (default abilene)')
     parser.add_argument('--data_folder', type=str, default='../data')
     parser.add_argument('--tensorboard_folder', type=str, default='../logs/core/')
@@ -108,6 +108,10 @@ def args_adjust(args):
         args.day_size = 1440
     elif 'germany' in args.dataset:
         args.num_node = 50
+        args.num_flow = args.num_node * args.num_node
+        args.day_size = 288
+    elif 'gnnet-40' in args.dataset:
+        args.num_node = 40
         args.num_flow = args.num_node * args.num_node
         args.day_size = 288
     else:

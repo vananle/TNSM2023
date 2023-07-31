@@ -68,13 +68,8 @@ def load_raw_data(args):
     data[data == np.nan] = 1e-4
     # Train-test split
 
-    if 'abilene' in args.dataset or 'geant' in args.dataset:
-        total_steps = get_data_size(dataset=args.dataset)
-        data_traffic = data[:total_steps]
-
-    else:
-        total_steps = data.shape[0]
-        data_traffic = data[:total_steps]
+    total_steps = get_data_size(dataset=args.dataset, data=data)
+    data_traffic = data[:total_steps]
 
     train_size = int(0.7 * total_steps)
     val_size = int(0.1 * total_steps)
@@ -85,13 +80,13 @@ def load_raw_data(args):
     return train_df, val_df, test_df
 
 
-def get_data_size(dataset):
+def get_data_size(dataset, data):
     if 'abilene' in dataset:
-        return 3000
+        return 3000  # use 3000 traffic matrices of abilene dataset > 10 days
     elif 'geant' in dataset:
-        return 1000
+        return 1000  # use 1000 traffic matrices of geant dataset > 10 days
     else:
-        raise NotImplementedError
+        return data.shape[0]
 
 
 def data_split(args):
