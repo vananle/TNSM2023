@@ -10,6 +10,11 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 def exp_9():
     args = utils.get_args()
+    args.data_folder = '../../data'
+    args.tensorboard_folder = '../../logs/core/'
+    args.csv_folder = '../../data/csv/'
+    args.model_folder = '../../logs/core/'
+
     t1 = time.time()
     input_len = [12]
     datasets = ['abilene', 'geant']
