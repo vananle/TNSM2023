@@ -131,7 +131,7 @@ def exp_1():
                     args.seed = seed
 
                     args = utils.args_adjust(args)
-                    args.test = True
+                    args.test = False
                     args.te_alg = 'srls'
                     args.timeout = 1
                     metrics, mlu, rc = run_exp(args)
