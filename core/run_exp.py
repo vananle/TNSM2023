@@ -104,7 +104,7 @@ def exp_1():
     # datasets = ['abilene', 'geant']
     datasets = ['germany', 'gnnet-40']
     models = ['gwn', 'lstm', 'gru', 'stgcn', 'mtgnn']
-    predict_len = [3, 6, 9, 12, 15]
+    predict_len = [3, 6, 9, 12]
     seeds = [20, 5, 1, 46, 77]
     # seeds are randomly generated from seeds = np.random.choice(np.arange(100), size=10, replace=False)
     for seed in seeds:
