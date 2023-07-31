@@ -97,6 +97,7 @@ def run_te(args):
 
 
 def exp_1():
+    print('|----- RUN EXP 1: TRAFFIC PREDICTION WITH DIFFERENT PRED_LEN ----')
     args = utils.get_args()
     t1 = time.time()
     input_len = 15
