@@ -100,7 +100,8 @@ def exp_1():
     args = utils.get_args()
     t1 = time.time()
     input_len = 15
-    datasets = ['abilene', 'geant']
+    # datasets = ['abilene', 'geant']
+    datasets = ['germany', 'gnnet-40']
     models = ['gwn', 'lstm', 'gru', 'stgcn', 'mtgnn']
     predict_len = [3, 6, 9, 12, 15]
     seeds = [20, 5, 1, 46, 77]
@@ -156,7 +157,8 @@ def exp_2():
     args = utils.get_args()
     t1 = time.time()
     input_len = [12, 15, 18, 21]
-    datasets = ['abilene', 'geant']
+    datasets = ['germany', 'gnnet-40']
+    # datasets = ['abilene', 'geant']
     models = ['gwn', 'lstm', 'gru', 'stgcn', 'mtgnn']
     pre_len = 6
     seeds = [20, 5, 1, 46, 77]
@@ -217,7 +219,8 @@ def exp_3():
     args = utils.get_args()
     t1 = time.time()
     input_len = 15
-    datasets = ['abilene', 'geant']
+    datasets = ['germany', 'gnnet-40']
+    # datasets = ['abilene', 'geant']
     models = ['gwn', 'lstm', 'gru', 'stgcn', 'mtgnn']
     predict_len = [3, 6, 9, 12, 15]
     seeds = [20, 5, 1, 46, 77]
@@ -479,7 +482,8 @@ def exp_8():
     args = utils.get_args()
     t1 = time.time()
     input_len = 15
-    datasets = ['abilene', 'geant']
+    datasets = ['germany', 'gnnet-40']
+    # datasets = ['abilene', 'geant']
     models = ['gwn']
     mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     pre_len = 6

@@ -1037,6 +1037,5 @@ def plot_dynamic():
 # plot_exp6()
 # plot_exp6_mae()
 # plot_exp7()
-# plot_exp3()
 # plot_exp4()
 plot_dynamic()

@@ -120,5 +120,5 @@ def data_skewness(args):
 if __name__ == "__main__":
     args = utils.get_args()
 
-    # data_time_dynamicity(args)
+    data_time_dynamicity(args)
     data_skewness(args)
