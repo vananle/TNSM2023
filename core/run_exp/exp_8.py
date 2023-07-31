@@ -2,7 +2,7 @@ import sys
 
 sys.path.append('../../../')
 
-from .run_exp import *
+from core.run_exp.run_exp import *
 
 warnings.simplefilter("ignore")
 warnings.filterwarnings("ignore", category=UserWarning)
