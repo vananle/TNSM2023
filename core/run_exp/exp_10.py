@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append('../../../')
+sys.path.append('../../')
 
 from core.run_exp.run_exp import *
 

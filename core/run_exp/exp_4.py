@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append('../../../')
+sys.path.append('../../')
 import itertools
 
 from joblib import Parallel, delayed

@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append('../../../')
+sys.path.append('../../')
 
 from core.run_exp.run_exp import *
 
@@ -11,6 +11,12 @@ warnings.filterwarnings("ignore", category=UserWarning)
 def exp_1():
     print('|----- RUN EXP 1: TRAFFIC PREDICTION WITH DIFFERENT PRED_LEN ----')
     args = utils.get_args()
+
+    args.data_folder = '../../data'
+    args.tensorboard_folder = '../../logs/core/'
+    args.csv_folder = '../../data/csv/'
+    args.model_folder = '../../logs/core/'
+
     t1 = time.time()
     input_len = 15
     # datasets = ['abilene', 'geant']
