@@ -5,7 +5,7 @@ import itertools
 
 from joblib import Parallel, delayed
 
-from core.run_exp.run_exp import *
+from core.run_exp.base_runner import *
 
 warnings.simplefilter("ignore")
 warnings.filterwarnings("ignore", category=UserWarning)
