@@ -109,7 +109,7 @@ def plot_exp1(datasets, models, input_len, predict_len, colors, label_models, se
     for dataset_id, dataset in enumerate(datasets):
         results_mae = []
         for index, seed in enumerate(seeds):
-            path = f'../results/core/exp1/mtsr_prediction_error_vs_prediction_len_{dataset}_mae_{seed}.txt'
+            path = f'../../results/core/exp1/mtsr_prediction_error_vs_prediction_len_{dataset}_mae_{seed}.txt'
             data = np.loadtxt(path, delimiter=',')
             if index == 0:
                 results_mae = data
