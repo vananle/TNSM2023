@@ -1,14 +1,20 @@
 import sys
 
 sys.path.append('../../')
+from matplotlib import pyplot as plt
 
 from core.run_exp.base_runner import *
 
 warnings.simplefilter("ignore")
 warnings.filterwarnings("ignore", category=UserWarning)
 
+logs_path = '../../results/core/'
+results_plot_path = '../../results_plot/core'
+if not os.path.exists(results_plot_path):
+    os.makedirs(results_plot_path)
 
-def exp_1():
+
+def exp_1(datasets, models, input_len, predict_len, seeds):
     print('|----- RUN EXP 1: TRAFFIC PREDICTION WITH DIFFERENT PRED_LEN ----')
     args = utils.get_args()
 
@@ -18,13 +24,6 @@ def exp_1():
     args.model_folder = '../../logs/core/'
 
     t1 = time.time()
-    input_len = 15
-    # datasets = ['abilene', 'geant']
-    datasets = ['germany', 'gnnet-40']
-    models = ['gwn', 'lstm', 'gru', 'stgcn', 'mtgnn']
-    predict_len = [3, 6, 9, 12]
-    seeds = [20, 5, 1, 46, 77]
-    # seeds are randomly generated from seeds = np.random.choice(np.arange(100), size=10, replace=False)
     for seed in seeds:
         for dataset_id, dataset in enumerate(datasets):
             results = {'loss': np.zeros(shape=(len(models), len(predict_len))),
@@ -72,4 +71,82 @@ def exp_1():
     print('Date&Time: ', date.today())
 
 
-exp_1()
+def plot_exp1(datasets, models, input_len, predict_len, colors, label_models, seeds):
+    args = utils.get_args()
+    results = {}
+    args.data_folder = '../../data'
+    args.tensorboard_folder = '../../logs/core/'
+    args.csv_folder = '../../data/csv/'
+    args.model_folder = '../../logs/core/'
+
+    for dataset_id, dataset in enumerate(datasets):
+        for model_id, model in enumerate(models):
+            for pred_len_id, pre_len in enumerate(predict_len):
+                for seed in seeds:
+                    args.input_len = input_len
+                    args.predict_len = pre_len
+                    args.dataset = dataset
+                    args.model = model
+
+                    args.train_batch_size = 32
+                    args.val_batch_size = 32
+                    args.seed = seed
+
+                    args.test = True
+                    args.te_alg = 'srls'
+                    args.timeout = 1
+
+                    args = utils.args_adjust(args)
+
+                    monitor = Monitor(args, args.num_epochs)
+
+                    path = os.path.join(args.model_folder, f'te-{monitor.label}-{args.te_alg}-'
+                                                           f'{args.use_gt}-{args.timeout}.npz')
+
+                    data = np.load(path)
+                    results[f'{seed}-{dataset}-{model}-{pre_len}-srls'] = data
+
+    for dataset_id, dataset in enumerate(datasets):
+        results_mae = []
+        for index, seed in enumerate(seeds):
+            path = f'../results/core/exp1/mtsr_prediction_error_vs_prediction_len_{dataset}_mae_{seed}.txt'
+            data = np.loadtxt(path, delimiter=',')
+            if index == 0:
+                results_mae = data
+            else:
+                if len(results_mae.shape) == 2:
+                    results_mae = np.expand_dims(results_mae, axis=-1)
+                data = np.expand_dims(data, axis=-1)
+                results_mae = np.concatenate((results_mae, data), axis=-1)
+
+        mae_mean = np.mean(results_mae, axis=-1)
+        mae_std = np.std(results_mae, axis=-1)
+
+        print(mae_mean.shape)
+        fig, ax = plt.subplots()
+
+        for i in range(mae_mean.shape[0]):
+            ax.errorbar(predict_len, mae_mean[i], mae_std[i], label=label_models[i], color=colors[i])
+
+        ax.set_xlabel(r'Routing cycle length ($T$)', fontsize=15)
+        ax.set_ylabel('Mean Absolute Error', fontsize=15)
+        ax.tick_params(axis='both', which='both', labelsize=12)
+        ax.ticklabel_format(axis='y', style='sci', scilimits=(0, 0))
+        plt.legend(fontsize=15)
+        plt.savefig(os.path.join(results_plot_path, f'exp1_{dataset}_mae.svg'), dpi=300)
+        plt.close()
+
+
+if __name__ == "__main__":
+
+    input_len = 15
+    # datasets = ['abilene', 'geant']
+    datasets = ['germany', 'gnnet-40']
+    models = ['gwn', 'lstm', 'gru', 'stgcn', 'mtgnn']
+    predict_len = [3, 6, 9, 12]
+    seeds = [20, 5, 1, 46, 77]
+    colors = ['r', 'g', 'k', 'b', 'm']
+    label_models = ['GWN', 'LSTM', 'GRU', 'STGCN', 'MTGNN']
+
+    # exp_1(datasets, models, input_len, predict_len, seeds)
+    plot_exp1(datasets, models, input_len, predict_len, colors, label_models, seeds)
