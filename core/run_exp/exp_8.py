@@ -25,7 +25,7 @@ def exp_8():
     mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     pre_len = 6
     method = 'mtsr_cs'
-    mon_method = 'topk'  # random, topk, topk_random, topk_per_node
+    mon_method = 'topk_random'  # random, topk, topk_random, topk_per_node
 
     seeds = [20, 5, 1, 46, 77]
 
