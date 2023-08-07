@@ -25,7 +25,7 @@ def exp_7():
     mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     pre_len = 6
     method = 'mtsr_nocs'
-    mon_method = 'random'
+    mon_method = 'random'  # random, topk, topk_random, topk_per_node
 
     seeds = [20, 5, 1, 46, 77]
 
@@ -60,9 +60,9 @@ def exp_7():
                     results['rc'][model_id, mon_p_id] = np.mean(rc)
                     print(dataset, model, pre_len, metrics)
 
-            os.makedirs('../results/core/exp7', exist_ok=True)
+            os.makedirs('../../results/core/exp7', exist_ok=True)
             for k, v in results.items():
-                np.savetxt(f'../results/core/exp7/mtsr_nocs_{method}_{mon_method}_{dataset}_{k}_{seed}.txt', results[k],
+                np.savetxt(f'../../results/core/exp7/mtsr_nocs_{method}_{mon_method}_{dataset}_{k}_{seed}.txt', results[k],
                            delimiter=',')
 
     t2 = time.time()
