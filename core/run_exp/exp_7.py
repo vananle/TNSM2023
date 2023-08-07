@@ -19,7 +19,8 @@ def exp_7():
 
     t1 = time.time()
     input_len = 15
-    datasets = ['abilene', 'geant']
+    # datasets = ['abilene', 'geant']
+    datasets = ['germany', 'gnnet-40']
     models = ['gwn']
     mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     pre_len = 6
