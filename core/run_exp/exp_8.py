@@ -15,8 +15,8 @@ if not os.path.exists(results_plot_path):
     os.makedirs(results_plot_path)
 
 
-def exp_8(datasets, models, mon_per, input_len, predict_len, colors, label_models, seeds):
-    print('RUNNNING EXP8')
+def exp_8(datasets, mon_method, models, mon_per, input_len, predict_len, seeds):
+    print('RUNNNING EXP8 mtsr_cs')
 
     args = utils.get_args()
     args.data_folder = '../../data'
@@ -26,7 +26,6 @@ def exp_8(datasets, models, mon_per, input_len, predict_len, colors, label_model
 
     t1 = time.time()
     method = 'mtsr_cs'
-    mon_method = 'topk_random'  # random, topk, topk_random, topk_per_node
 
     for seed in seeds:
         for dataset_id, dataset in enumerate(datasets):
@@ -86,7 +85,6 @@ def plot_exp8(datasets, mon_per, colors, label_models, seeds):
 
         fig, ax = plt.subplots()
         for mon_id, mon_method in enumerate(mon_methods):
-            results_mtsr = []
             mae_mtsr = []
             for i, seed in enumerate(seeds):
 
@@ -128,9 +126,10 @@ if __name__ == "__main__":
     method = 'mtsr_cs'
     mon_method = 'topk_random'  # random, topk, topk_random, topk_per_node
 
-    datasets = ['germany', 'gnnet-40']
+    datasets = ['germany']
     seeds = [20, 5, 1, 46, 77]
     colors = ['k', 'g', 'r', 'b', 'm']
     label_models = ['TOPK', 'RANDOM', 'PROPOSAL']
 
-    plot_exp8(datasets, mon_per, colors, label_models, seeds)
+    # plot_exp8(datasets, mon_per, colors, label_models, seeds)
+    exp_8(datasets, models,mon_method, mon_per, input_len, predict_len, seeds)
