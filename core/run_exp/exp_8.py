@@ -124,7 +124,7 @@ if __name__ == "__main__":
     mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     predict_len = 6
     method = 'mtsr_cs'
-    mon_method = 'topk_random'  # random, topk, topk_random, topk_per_node
+    mon_method = 'random'  # random, topk, topk_random, topk_per_node
 
     datasets = ['germany']
     seeds = [20, 5, 1, 46, 77]
@@ -132,4 +132,4 @@ if __name__ == "__main__":
     label_models = ['TOPK', 'RANDOM', 'PROPOSAL']
 
     # plot_exp8(datasets, mon_per, colors, label_models, seeds)
-    exp_8(datasets, models,mon_method, mon_per, input_len, predict_len, seeds)
+    exp_8(datasets, models, mon_method, mon_per, input_len, predict_len, seeds)
