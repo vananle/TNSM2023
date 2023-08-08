@@ -10,3 +10,4 @@ build
 .spyderproject
 .spyproject
 .python-version
+__pycache__
