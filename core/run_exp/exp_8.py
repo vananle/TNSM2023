@@ -1,5 +1,7 @@
 import sys
+
 import matplotlib.pyplot as plt
+
 sys.path.append('../../')
 
 from core.run_exp.base_runner import *
@@ -12,6 +14,7 @@ results_plot_path = '../../results_plot/core'
 if not os.path.exists(results_plot_path):
     os.makedirs(results_plot_path)
 
+
 def exp_8(datasets, models, mon_per, input_len, predict_len, colors, label_models, seeds):
     print('RUNNNING EXP8')
 
@@ -22,14 +25,8 @@ def exp_8(datasets, models, mon_per, input_len, predict_len, colors, label_model
     args.model_folder = '../../logs/core/'
 
     t1 = time.time()
-    input_len = 15
-    models = ['gwn']
-    mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-    pre_len = 6
     method = 'mtsr_cs'
     mon_method = 'topk_random'  # random, topk, topk_random, topk_per_node
-
-    seeds = [20, 5, 1, 46, 77]
 
     for seed in seeds:
         for dataset_id, dataset in enumerate(datasets):
@@ -46,7 +43,7 @@ def exp_8(datasets, models, mon_per, input_len, predict_len, colors, label_model
             for model_id, model in enumerate(models):
                 for mon_p_id, mon_p in enumerate(mon_per):
                     args.input_len = input_len
-                    args.predict_len = pre_len
+                    args.predict_len = predict_len
                     args.dataset = dataset
                     args.model = model
                     args.mon_method = mon_method
@@ -66,11 +63,12 @@ def exp_8(datasets, models, mon_per, input_len, predict_len, colors, label_model
                         results[k][model_id, mon_p_id] = v
                     results['mlu'][model_id, mon_p_id] = np.mean(mlu)
                     results['rc'][model_id, mon_p_id] = np.mean(rc)
-                    print(dataset, model, pre_len, metrics)
+                    print(dataset, model, predict_len, metrics)
 
-            os.makedirs('../../results/core/exp8', exist_ok=True)
+            os.makedirs(f'{logs_path}/exp8', exist_ok=True)
             for k, v in results.items():
-                np.savetxt(f'../../results/core/exp8/mtsr_cs_{method}_{mon_method}_{dataset}_{k}_{seed}.txt', results[k],
+                np.savetxt(f'{logs_path}/exp8/mtsr_cs_{method}_{mon_method}_{dataset}_{k}_{seed}.txt',
+                           results[k],
                            delimiter=',')
 
     t2 = time.time()
@@ -79,17 +77,10 @@ def exp_8(datasets, models, mon_per, input_len, predict_len, colors, label_model
     print('Date&Time: ', date.today())
 
 
-
-def plot_exp8(datasets, models, input_len, predict_len, colors, label_models, seeds):
-    mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-    pre_len = 6
+def plot_exp8(datasets, mon_per, colors, label_models, seeds):
     method = 'mtsr_cs'
     mon_methods = ['topk', 'random', 'topk_random']
-    MON_METHODS = ['TOPK', 'RANDOM', 'PROPOSAL']
-    seeds = [20, 5, 1, 46, 77]
     mon_per = np.array(mon_per)
-
-    colors = ['k', 'g', 'r']
 
     for dataset_id, dataset in enumerate(datasets):
 
@@ -99,7 +90,7 @@ def plot_exp8(datasets, models, input_len, predict_len, colors, label_models, se
             mae_mtsr = []
             for i, seed in enumerate(seeds):
 
-                path = f'../results/core/exp8/{method}_{method}_{mon_method}_{dataset}_mae_y_cs_{seed}.txt'
+                path = f'{logs_path}/exp8/{method}_{method}_{mon_method}_{dataset}_mae_y_cs_{seed}.txt'
 
                 data = np.loadtxt(path, delimiter=',')
                 if i == 0:
@@ -118,20 +109,18 @@ def plot_exp8(datasets, models, input_len, predict_len, colors, label_models, se
                 mae_mtsr_mean = mae_mtsr_mean / 300
                 mae_mtsr_std = mae_mtsr_std / 300
 
-            ax.errorbar(mon_per * 100, mae_mtsr_mean, mae_mtsr_std, label=f'{MON_METHODS[mon_id]}',
+            ax.errorbar(mon_per * 100, mae_mtsr_mean, mae_mtsr_std, label=f'{label_models[mon_id]}',
                         color=colors[mon_id], linestyle="solid")
 
         ax.legend()
         ax.set_xlabel('Percentage of monitored flows (%)', fontsize=15)
         ax.set_ylabel('Mean Absolute Error', fontsize=15)
         plt.tick_params(axis='both', which='both', labelsize=12)
-        plt.savefig(os.path.join(results_plot_path, f'exp6_mae_{dataset}.svg'), dpi=300)
+        plt.savefig(os.path.join(results_plot_path, f'exp8_mae_{dataset}.svg'), dpi=300)
         plt.close()
 
 
-
 if __name__ == "__main__":
-
     input_len = 15
     models = ['gwn']
     mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
@@ -141,8 +130,7 @@ if __name__ == "__main__":
 
     datasets = ['germany', 'gnnet-40']
     seeds = [20, 5, 1, 46, 77]
-    colors = ['r', 'g', 'k', 'b', 'm']
-    label_models = ['GWN', 'LSTM', 'GRU', 'STGCN', 'MTGNN']
+    colors = ['k', 'g', 'r', 'b', 'm']
+    label_models = ['TOPK', 'RANDOM', 'PROPOSAL']
 
-    # exp_1(datasets, models, input_len, predict_len, seeds)
-    plot_exp8(datasets, models, input_len, predict_len, colors, label_models, seeds)
+    plot_exp8(datasets, mon_per, colors, label_models, seeds)
