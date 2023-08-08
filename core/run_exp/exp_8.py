@@ -64,9 +64,9 @@ def exp_8(datasets, mon_method, models, mon_per, input_len, predict_len, seeds):
                     results['rc'][model_id, mon_p_id] = np.mean(rc)
                     print(dataset, model, predict_len, metrics)
 
-            os.makedirs(f'{logs_path}/exp8', exist_ok=True)
+            os.makedirs(os.path.join(logs_path, 'exp8'), exist_ok=True)
             for k, v in results.items():
-                np.savetxt(f'{logs_path}/exp8/mtsr_cs_{method}_{mon_method}_{dataset}_{k}_{seed}.txt',
+                np.savetxt(os.path.join(logs_path, f'exp8/mtsr_cs_{method}_{mon_method}_{dataset}_{k}_{seed}.txt'),
                            results[k],
                            delimiter=',')
 
