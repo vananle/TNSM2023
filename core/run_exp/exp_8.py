@@ -90,8 +90,8 @@ def plot_exp8(datasets, mon_per, colors, label_models, seeds):
             mae_mtsr = []
             for i, seed in enumerate(seeds):
 
-                path = f'{logs_path}/exp8/{method}_{method}_{mon_method}_{dataset}_mae_y_cs_{seed}.txt'
-
+                path = f'exp8/{method}_{method}_{mon_method}_{dataset}_mae_y_cs_{seed}.txt'
+                path = os.path.join(logs_path, path)
                 data = np.loadtxt(path, delimiter=',')
                 if i == 0:
                     data = np.expand_dims(data, axis=-1)
