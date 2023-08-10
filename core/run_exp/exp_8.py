@@ -131,5 +131,5 @@ if __name__ == "__main__":
     colors = ['k', 'g', 'r', 'b', 'm']
     label_models = ['TOPK', 'RANDOM', 'PROPOSAL']
 
-    plot_exp8(datasets, mon_per, colors, label_models, seeds)
-    # exp_8(datasets, mon_method, models, mon_per, input_len, predict_len, seeds)
+    # plot_exp8(datasets, mon_per, colors, label_models, seeds)
+    exp_8(datasets, mon_method, models, mon_per, input_len, predict_len, seeds)
