@@ -126,7 +126,7 @@ if __name__ == "__main__":
     method = 'mtsr_cs'
     mon_method = 'random'  # random, topk, topk_random, topk_per_node
 
-    datasets = ['germany']
+    datasets = ['germany', 'gnnet-40']
     seeds = [20, 5, 1, 46, 77]
     colors = ['k', 'g', 'r', 'b', 'm']
     label_models = ['TOPK', 'RANDOM', 'PROPOSAL']
