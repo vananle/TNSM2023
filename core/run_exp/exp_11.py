@@ -16,9 +16,8 @@ def exp_11(datasets, models, input_len):
     args.csv_folder = '../../data/csv/'
     args.model_folder = '../../logs/core/'
 
-
     t1 = time.time()
-    te_algs = ['ob']
+    te_algs = ['p1', 'p2', 'p3']
     predict_len = [6]
     seed = 20
 
