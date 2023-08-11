@@ -91,7 +91,7 @@ def plot_exp7():
     # datasets = ['abilene', 'geant']
     datasets = ['germany', 'gnnet-40']
     model = 'gwn'
-    te_algs = ['p0']
+    te_algs = ['p2']
     pre_len = 6
     seed = 20
     for dataset_id, dataset in enumerate(datasets):
@@ -125,7 +125,7 @@ def plot_exp7():
 
     args = utils.get_args()
     input_len = 15
-    datasets = ['abilene', 'geant']
+    datasets = ['germany', 'gnnet-40']
     models = ['gwn']
     mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     pre_len = 6
