@@ -7,9 +7,17 @@ from core.run_exp.base_runner import *
 warnings.simplefilter("ignore")
 warnings.filterwarnings("ignore", category=UserWarning)
 
+logs_path = '../../results/core/'
+results_plot_path = '../../results_plot/core'
+if not os.path.exists(results_plot_path):
+    os.makedirs(results_plot_path)
 
-def exp_9():
+
+def exp_9(datasets, models, input_len, predict_len, seeds):
+    print('|----- RUN EXP 1: TRAFFIC PREDICTION WITH DIFFERENT PRED_LEN ----')
+
     args = utils.get_args()
+
     args.data_folder = '../../data'
     args.tensorboard_folder = '../../logs/core/'
     args.csv_folder = '../../data/csv/'
@@ -19,7 +27,7 @@ def exp_9():
     input_len = [12]
     datasets = ['abilene', 'geant']
     model = 'gwn'
-    te_algs = ['p1', 'p2']
+    te_algs = ['p0','p1', 'p2', 'ob']
     predict_len = [6]
     method = 'core'
 
@@ -50,9 +58,9 @@ def exp_9():
                 results['mlu'][te_alg_id, pred_len_id] = np.mean(mlu)
                 results['rc'][te_alg_id, pred_len_id] = np.mean(rc)
 
-        os.makedirs('../results/core/exp9/', exist_ok=True)
+        os.makedirs('../../results/core/exp9/', exist_ok=True)
         for k, v in results.items():
-            np.savetxt(f'../results/core/exp9/exp9_{dataset}_{k}.txt', results[k], delimiter=',')
+            np.savetxt(f'../../results/core/exp9/exp9_{dataset}_{k}.txt', results[k], delimiter=',')
 
     t2 = time.time()
     mins = (t2 - t1) / 60

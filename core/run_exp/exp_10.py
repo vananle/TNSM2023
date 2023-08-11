@@ -26,7 +26,6 @@ def exp_10():
     mon_method = 'random'
 
     seeds = [20, 5, 1, 46, 77]
-    # seeds = [77]
 
     for seed in seeds:
 

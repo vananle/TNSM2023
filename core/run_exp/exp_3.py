@@ -65,9 +65,9 @@ def exp_3():
 
                     i += 1
 
-            os.makedirs('../results/core/exp3/', exist_ok=True)
+            os.makedirs('../../results/core/exp3/', exist_ok=True)
             for k, v in results.items():
-                np.savetxt(f'../results/core/exp3/exp3_{dataset}_{k}_{seed}.txt', results[k], delimiter=',')
+                np.savetxt(f'../../results/core/exp3/exp3_{dataset}_{k}_{seed}.txt', results[k], delimiter=',')
 
     t2 = time.time()
     mins = (t2 - t1) / 60
