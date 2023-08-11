@@ -18,7 +18,7 @@ def exp_11(datasets, models, input_len):
 
 
     t1 = time.time()
-    te_algs = ['p1', 'p2', 'p3']
+    te_algs = ['ob']
     predict_len = [6]
     seed = 20
 
