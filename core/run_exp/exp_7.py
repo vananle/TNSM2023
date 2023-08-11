@@ -82,6 +82,10 @@ def exp_7():
 def plot_exp7():
     results = {}
     args = utils.get_args()
+    args.data_folder = '../../data'
+    args.tensorboard_folder = '../../logs/core/'
+    args.csv_folder = '../../data/csv/'
+    args.model_folder = '../../logs/core/'
 
     input_len = 15
     # datasets = ['abilene', 'geant']
