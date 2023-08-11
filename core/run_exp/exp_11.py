@@ -10,6 +10,13 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 def exp_11(datasets, models, input_len):
     args = utils.get_args()
+
+    args.data_folder = '../../data'
+    args.tensorboard_folder = '../../logs/core/'
+    args.csv_folder = '../../data/csv/'
+    args.model_folder = '../../logs/core/'
+
+
     t1 = time.time()
     te_algs = ['p1', 'p2', 'p3']
     predict_len = [6]
