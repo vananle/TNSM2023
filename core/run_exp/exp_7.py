@@ -101,7 +101,7 @@ def plot_exp7():
             args.dataset = dataset
             args.model = model
 
-            if te_alg == 'ob' or te_alg == 'p0' or te_alg == 'sp':
+            if te_alg == 'ob' or te_alg == 'sp':
                 seed = 1
             else:
                 seed = 20
