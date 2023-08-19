@@ -107,8 +107,8 @@ def data_skewness(args):
         # Step 4: Plot the tail distribution
         plt.plot(sorted_data, tail_prob, label=labels[idx])
 
-    plt.xlabel('Average traffic volume')
-    plt.ylabel('abc')
+    plt.xlabel('Normalized traffic volume')
+    plt.ylabel('Cumulative Probability')
     plt.title('Flow distribution')
     plt.legend()
     plt.grid(True)
