@@ -97,7 +97,7 @@ def data_skewness(args):
         data = load_data(args)
 
         mean_traffic = data.flatten()
-        print(dataset, 'Max:', np.max(data), 'Mean:', np.mean(data), 'min:', np.min(data), 'std:', np.std(data))
+        print('data: ', dataset, ' Max:', np.max(data), 'Mean:', np.mean(data), 'min:', np.min(data), 'std:', np.std(data))
         mean_traffic = np.expand_dims(mean_traffic, -1)
         scaler = MinMaxScaler()
         mean_traffic = scaler.fit_transform(X=mean_traffic)
