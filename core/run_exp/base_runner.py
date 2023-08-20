@@ -64,14 +64,14 @@ def run_exp(args):
                    'scaler': engine.data['scaler']
                    }
 
-    args.monitor = engine.monitor
-    mlu, rc = 0, 0
-    if args.te_alg != 'None':
-        te = routing.TrafficEngineering(args, data=te_data)
-        if args.model == 'vae':
-            mlu, rc = te.vae_ls2sr(engine.model)
-        else:
-            mlu, rc = te.run_te()
+    # args.monitor = engine.monitor
+    # mlu, rc = 0, 0
+    # if args.te_alg != 'None':
+    #     te = routing.TrafficEngineering(args, data=te_data)
+    #     if args.model == 'vae':
+    #         mlu, rc = te.vae_ls2sr(engine.model)
+    #     else:
+    #         mlu, rc = te.run_te()
 
     return metrics, mlu, rc
 
