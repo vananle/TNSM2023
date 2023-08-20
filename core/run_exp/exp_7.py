@@ -217,7 +217,6 @@ def plot_exp7():
         ax.legend()
         # ax2.legend(loc='upper center')
         ax.set_xlabel('Percentage of monitored flows (%)', fontsize=15)
-        # ax2.set_ylabel('MAE', fontsize=15, color='g')
         ax.set_ylabel(r'$r_{mlu}$', fontsize=15)
         plt.tick_params(axis='both', which='both', labelsize=12)
         plt.savefig(os.path.join(results_plot_path, f'exp7_{dataset}.svg'), dpi=300)
