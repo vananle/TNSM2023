@@ -112,7 +112,8 @@ def plot_exp8(datasets, mon_per, colors, label_models, seeds):
 
         ax.legend()
         ax.set_xlabel('Percentage of monitored flows (%)', fontsize=15)
-        ax.set_ylabel('Mean Absolute Error', fontsize=15, style='sci')
+        ax.set_ylabel('Mean Absolute Error', fontsize=15)
+        ax.ticklabel_format(axis='y', style='sci', scilimits=(0, 0))
         plt.tick_params(axis='both', which='both', labelsize=12)
         plt.savefig(os.path.join(results_plot_path, f'exp8_mae_{dataset}.svg'), dpi=300)
         plt.close()
