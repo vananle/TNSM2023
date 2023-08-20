@@ -196,7 +196,7 @@ def get_monitoring_index(data, prev_id_mon_flow, first_step, args):
                 while rand_idx in old_id_mon_flow:
                     rand_idx = np.random.randint(0, args.num_flow)
 
-            id_mon_flow[num_mon_flow - num_new_id_mon_flow + i] = rand_idx
+                id_mon_flow[num_mon_flow - num_new_id_mon_flow + i] = rand_idx
     elif mon_method == 'topk_per_node':
         num_mon_flow = int(args.mon_per * args.num_node) * args.num_node
         args.num_mon_flow = num_mon_flow
