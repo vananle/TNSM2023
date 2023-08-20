@@ -193,8 +193,8 @@ class TrainEngine:
             batch_mape.append(mape.item())
             batch_rmse.append(rmse.item())
 
-        print('--------> Avg runtime: ', np.mean(np.array(run_time)))
-        exit(1)
+        print(f'--------> Avg runtime: {self.args.dataset} - {np.mean(np.array(run_time))}')
+        exit(0)
 
         y_hat = torch.cat(y_hat, dim=0)
         y_hat = y_hat.cpu().numpy()
