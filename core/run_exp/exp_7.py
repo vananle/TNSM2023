@@ -131,6 +131,8 @@ def plot_exp7():
     pre_len = 6
     method = 'mtsr_cs'
     mon_methods = ['topk', 'random', 'topk_random']
+    MON_METHODS = ['TOPK', 'RANDOM', 'PROPOSAL']
+
     seeds = [20, 5, 1, 46, 77]
     mon_per = np.array(mon_per)
 
@@ -169,8 +171,8 @@ def plot_exp7():
         results_mtsr_nocs_mean = np.mean(results_mtsr_nocs, axis=-1)
         results_mtsr_nocs_std = np.std(results_mtsr_nocs, axis=-1)
 
-        ax.errorbar(mon_per * 100, results_mtsr_nocs_mean, results_mtsr_nocs_std, label='MTSR (MLU)', linestyle="solid",
-                    color='k')
+        # ax.errorbar(mon_per * 100, results_mtsr_nocs_mean, results_mtsr_nocs_std, label='MTSR (MLU)', linestyle="solid",
+        #             color='k')
 
         for mon_id, mon_method in enumerate(mon_methods):
             results_mtsr = []
@@ -209,7 +211,7 @@ def plot_exp7():
             results_mtsr_std = np.std(results_mtsr, axis=-1)
 
             ax.errorbar(mon_per * 100, results_mtsr_mean, results_mtsr_std,
-                        label='MTSR-CS (MLU)', color='r',
+                        label=f'{MON_METHODS[mon_id]}', color=colors[mon_id],
                         linestyle='solid')
 
         ax.legend()
