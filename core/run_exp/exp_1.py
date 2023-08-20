@@ -48,7 +48,7 @@ def exp_1(datasets, models, input_len, predict_len, seeds):
                     args.seed = seed
 
                     args = utils.args_adjust(args)
-                    args.test = True
+                    args.test = False
                     args.te_alg = 'srls'
                     args.timeout = 60
                     metrics, mlu, rc = run_exp(args)
