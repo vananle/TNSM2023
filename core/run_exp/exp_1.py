@@ -48,9 +48,9 @@ def exp_1(datasets, models, input_len, predict_len, seeds):
                     args.seed = seed
 
                     args = utils.args_adjust(args)
-                    args.test = False
+                    args.test = True
                     args.te_alg = 'srls'
-                    args.timeout = 1
+                    args.timeout = 60
                     metrics, mlu, rc = run_exp(args)
                     for k, v in metrics.items():
                         results[k][model_id, pred_len_id] = v
@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
     input_len = 15
     # datasets = ['abilene', 'geant']
-    datasets = ['germany', 'gnnet-40']
+    datasets = ['abilene', 'geant', 'germany', 'gnnet-40']
     models = ['gwn', 'lstm', 'gru', 'stgcn', 'mtgnn']
     predict_len = [3, 6, 9, 12]
     seeds = [20, 5, 1, 46, 77]

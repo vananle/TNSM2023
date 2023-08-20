@@ -1,6 +1,8 @@
 import copy
 import sys
+import time
 
+import numpy as np
 import torch.nn
 
 sys.path.append('../')
@@ -157,13 +159,17 @@ class TrainEngine:
 
         y_hat = []
         batch_loss, batch_rse, batch_mae, batch_mse, batch_mape, batch_rmse = [], [], [], [], [], []
+        run_time = []
         for idx, (x, y) in enumerate(loader):
             if y.max() == 0:
                 continue
             if mode == 'train':
                 optimizer.zero_grad()
+            time_s = time.time()
 
             output = model(self.reshape_input(x))  # now, output = [bs, seq_y, n]
+            run_time.append(time.time() - time_s)
+
             if mode == 'train':
                 y_hat.append(copy.deepcopy(output.detach()))
             else:
@@ -186,6 +192,9 @@ class TrainEngine:
             batch_mse.append(mse.item())
             batch_mape.append(mape.item())
             batch_rmse.append(rmse.item())
+
+        print(f'--------> Avg runtime: {self.args.dataset} - {np.mean(np.array(run_time))}')
+        exit(0)
 
         y_hat = torch.cat(y_hat, dim=0)
         y_hat = y_hat.cpu().numpy()
