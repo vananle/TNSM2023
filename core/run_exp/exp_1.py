@@ -70,6 +70,22 @@ def exp_1(datasets, models, input_len, predict_len, seeds):
     print("Total time spent: {:.2f} seconds".format(mins))
     print('Date&Time: ', date.today())
 
+def plot_runtime():
+
+    values = [0.050559921698136764, 0.13788055289875378, 0.26901960372924805, 0.49418334166208905]
+    fig, ax = plt.subplots(figsize=(9, 5))
+    datasets = ['144 (Abilene)', '484 flows (Geant)', '1600 (Gnnet-40)', '2500 (Germany)']
+
+    plt.bar(datasets, values)
+
+    ax.set_xlabel(r'Number of flows', fontsize=15)
+    ax.set_ylabel('Prediction time (second)', fontsize=15)
+    ax.tick_params(axis='both', which='both', labelsize=12)
+    ax.ticklabel_format(axis='y', style='sci', scilimits=(0, 0))
+    # plt.legend(fontsize=15)
+    plt.savefig(os.path.join(results_plot_path, f'run_time.svg'), dpi=300)
+    plt.close()
+
 
 def plot_exp1(datasets, models, input_len, predict_len, colors, label_models, seeds):
     args = utils.get_args()
@@ -151,5 +167,6 @@ if __name__ == "__main__":
     colors = ['r', 'g', 'k', 'b', 'm']
     label_models = ['GWN', 'LSTM', 'GRU', 'STGCN', 'MTGNN']
 
-    exp_1(datasets, models, input_len, predict_len, seeds)
+    # exp_1(datasets, models, input_len, predict_len, seeds)
     # plot_exp1(datasets, models, input_len, predict_len, colors, label_models, seeds)
+    plot_runtime()

@@ -1,6 +1,8 @@
 import copy
 import sys
+import time
 
+import numpy as np
 import tensorflow as tf
 import torch.nn
 
@@ -141,7 +143,11 @@ class TrainEngine_VAE:
                     psiT = obj['psiT']
 
                 y_cs = np.zeros(shape=(y_hat.shape[0], self.args.num_flow))
+
+                run_time = []
+
                 for t in range(y_hat.shape[0]):
+                    time_s = time.time()
                     mon_index_t = mon_index[t]
 
                     phi = get_phi(mon_index_t, self.args.num_flow)
@@ -152,6 +158,11 @@ class TrainEngine_VAE:
                     ycs = np.dot(ShatT, psiT)
                     ycs[:, mon_index_t] = y_hat_t
                     y_cs[t] = ycs.flatten()  # shape(n, N_F)
+
+                    run_time.append(time.time() - time_s)
+
+                run_time = np.array(run_time)
+                np.save(f'/home/anle/mtsr-cs-runtime-{self.args.dataset}-{self.args.mon_per}.npy', run_time)
 
             elif self.args.method == 'mtsr_nocs':
                 y_cs = np.zeros(shape=(y_hat.shape[0], self.args.num_flow))
