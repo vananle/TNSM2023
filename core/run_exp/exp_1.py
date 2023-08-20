@@ -140,11 +140,14 @@ def plot_exp1(datasets, models, input_len, predict_len, colors, label_models, se
 if __name__ == "__main__":
 
     input_len = 15
-    # datasets = ['abilene', 'geant']
-    datasets = ['abilene', 'geant', 'germany', 'gnnet-40']
-    models = ['gwn', 'lstm', 'gru', 'stgcn', 'mtgnn']
-    predict_len = [3, 6, 9, 12]
-    seeds = [20, 5, 1, 46, 77]
+    # datasets = ['abilene', 'geant', 'germany', 'gnnet-40']
+    datasets =  ['geant']
+    # models = ['gwn', 'lstm', 'gru', 'stgcn', 'mtgnn']
+    models = ['gwn']
+    # predict_len = [3, 6, 9, 12]
+    predict_len = [6]
+    # seeds = [20, 5, 1, 46, 77]
+    seeds = [20]
     colors = ['r', 'g', 'k', 'b', 'm']
     label_models = ['GWN', 'LSTM', 'GRU', 'STGCN', 'MTGNN']
 
