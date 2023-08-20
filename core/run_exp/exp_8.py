@@ -112,7 +112,7 @@ def plot_exp8(datasets, mon_per, colors, label_models, seeds):
 
         ax.legend()
         ax.set_xlabel('Percentage of monitored flows (%)', fontsize=15)
-        ax.set_ylabel('Mean Absolute Error', fontsize=15)
+        ax.set_ylabel('Mean Absolute Error', fontsize=15, style='sci')
         plt.tick_params(axis='both', which='both', labelsize=12)
         plt.savefig(os.path.join(results_plot_path, f'exp8_mae_{dataset}.svg'), dpi=300)
         plt.close()
@@ -126,10 +126,10 @@ if __name__ == "__main__":
     method = 'mtsr_cs'
     mon_method = 'topk_random'  # random, topk, topk_random, topk_per_node
 
-    datasets = ['germany','gnnet-40']
+    datasets = ['germany', 'gnnet-40']
     seeds = [20, 5, 1, 46, 77]
     colors = ['k', 'g', 'r', 'b', 'm']
     label_models = ['TOPK', 'RANDOM', 'PROPOSAL']
 
-    # plot_exp8(datasets, mon_per, colors, label_models, seeds)
-    exp_8(datasets, mon_method, models, mon_per, input_len, predict_len, seeds)
+    plot_exp8(datasets, mon_per, colors, label_models, seeds)
+    # exp_8(datasets, mon_method, models, mon_per, input_len, predict_len, seeds)
