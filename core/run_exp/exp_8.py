@@ -58,17 +58,17 @@ def exp_8(datasets, mon_method, models, mon_per, input_len, predict_len, seeds):
                     args.te_alg = 'srls'
                     args.timeout = 1
                     metrics, mlu, rc = run_exp(args)
-                    for k, v in metrics.items():
-                        results[k][model_id, mon_p_id] = v
-                    results['mlu'][model_id, mon_p_id] = np.mean(mlu)
-                    results['rc'][model_id, mon_p_id] = np.mean(rc)
-                    print(dataset, model, predict_len, metrics)
-
-            os.makedirs(os.path.join(logs_path, 'exp8'), exist_ok=True)
-            for k, v in results.items():
-                np.savetxt(os.path.join(logs_path, f'exp8/mtsr_cs_{method}_{mon_method}_{dataset}_{k}_{seed}.txt'),
-                           results[k],
-                           delimiter=',')
+            #         for k, v in metrics.items():
+            #             results[k][model_id, mon_p_id] = v
+            #         results['mlu'][model_id, mon_p_id] = np.mean(mlu)
+            #         results['rc'][model_id, mon_p_id] = np.mean(rc)
+            #         print(dataset, model, predict_len, metrics)
+            #
+            # os.makedirs(os.path.join(logs_path, 'exp8'), exist_ok=True)
+            # for k, v in results.items():
+            #     np.savetxt(os.path.join(logs_path, f'exp8/mtsr_cs_{method}_{mon_method}_{dataset}_{k}_{seed}.txt'),
+            #                results[k],
+            #                delimiter=',')
 
     t2 = time.time()
     mins = (t2 - t1) / 60

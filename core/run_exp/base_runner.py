@@ -64,8 +64,8 @@ def run_exp(args):
                    'scaler': engine.data['scaler']
                    }
 
-    # args.monitor = engine.monitor
-    # mlu, rc = 0, 0
+    args.monitor = engine.monitor
+    mlu, rc = 0, 0
     # if args.te_alg != 'None':
     #     te = routing.TrafficEngineering(args, data=te_data)
     #     if args.model == 'vae':
