@@ -166,7 +166,7 @@ def data_skewness(args):
     plt.ylabel('Cumulative Probability')
     # plt.title('Flow distribution')
     plt.legend()
-    plt.grid(True)
+    # plt.grid(True)
     fig_name = os.path.join(save_figs_dir, f'flow_distribution.svg')
     plt.savefig(fig_name, dpi=300)
     plt.close()

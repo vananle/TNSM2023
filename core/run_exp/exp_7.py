@@ -130,7 +130,7 @@ def plot_exp7():
     mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     pre_len = 6
     method = 'mtsr_cs'
-    mon_methods = ['topk_random']
+    mon_methods = ['topk', 'random', 'topk_random']
     seeds = [20, 5, 1, 46, 77]
     mon_per = np.array(mon_per)
 
