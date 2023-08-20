@@ -155,12 +155,12 @@ def data_split(args):
     return data
 
 
-
-def get_monitoring_index(data, prev_id_mon_flow, first_step, args):
+def get_monitoring_index(data, prev_id_mon_flow, is_first_step, args):
     """
 
     @param data: the raw traffic data
     @param prev_id_mon_flow: the indices of monitored flows of a previous routing round
+    @param is_first_step: is this the first step
     @param args:
     @return: the index of monitored flow
     """
@@ -169,7 +169,7 @@ def get_monitoring_index(data, prev_id_mon_flow, first_step, args):
     if mon_method == 'random':
         num_mon_flow = int(args.mon_per * args.num_flow)
         args.num_mon_flow = num_mon_flow
-        if np.random.uniform(0, 1) > 0.7 or first_step:
+        if np.random.uniform(0, 1) > 0.7 or is_first_step:
             id_mon_flow = np.random.choice(a=np.arange(0, args.num_flow), size=num_mon_flow, replace=False)
         else:
             id_mon_flow = copy.deepcopy(prev_id_mon_flow)
@@ -184,7 +184,7 @@ def get_monitoring_index(data, prev_id_mon_flow, first_step, args):
         num_mon_flow = int(args.mon_per * args.num_flow)
         args.num_mon_flow = num_mon_flow
 
-        if first_step:
+        if is_first_step:
             mean_traffic = np.mean(data, axis=0)
             id_mon_flow = np.argsort(mean_traffic)[::-1][:num_mon_flow]
         else:
@@ -196,7 +196,7 @@ def get_monitoring_index(data, prev_id_mon_flow, first_step, args):
                 while rand_idx in old_id_mon_flow:
                     rand_idx = np.random.randint(0, args.num_flow)
 
-            id_mon_flow[num_mon_flow - num_new_id_mon_flow + i] = rand_idx
+                id_mon_flow[num_mon_flow - num_new_id_mon_flow + i] = rand_idx
     elif mon_method == 'topk_per_node':
         num_mon_flow = int(args.mon_per * args.num_node) * args.num_node
         args.num_mon_flow = num_mon_flow
@@ -241,7 +241,7 @@ def data_split_cs(args):
             label_gt_max = np.max(data[i + predict_indices], axis=0)
 
             id_mon_flow = get_monitoring_index(data=feature_gt, prev_id_mon_flow=prev_id_mon_flow,
-                                               first_step=True if i == i0 else False,
+                                               is_first_step=True if i == i0 else False,
                                                args=args)
 
             id_mon_flow = np.array(id_mon_flow).flatten()
