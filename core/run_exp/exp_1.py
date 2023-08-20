@@ -148,5 +148,5 @@ if __name__ == "__main__":
     colors = ['r', 'g', 'k', 'b', 'm']
     label_models = ['GWN', 'LSTM', 'GRU', 'STGCN', 'MTGNN']
 
-    # exp_1(datasets, models, input_len, predict_len, seeds)
-    plot_exp1(datasets, models, input_len, predict_len, colors, label_models, seeds)
+    exp_1(datasets, models, input_len, predict_len, seeds)
+    # plot_exp1(datasets, models, input_len, predict_len, colors, label_models, seeds)
