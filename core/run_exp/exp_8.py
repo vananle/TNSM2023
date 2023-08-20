@@ -121,10 +121,10 @@ def plot_exp8(datasets, mon_per, colors, label_models, seeds):
 if __name__ == "__main__":
     input_len = 15
     models = ['gwn']
-    mon_per = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    mon_per = [0.1, 0.3, 0.5, 0.7, 0.9]
     predict_len = 6
     method = 'mtsr_cs'
-    mon_method = 'random'  # random, topk, topk_random, topk_per_node
+    mon_method = 'topk_random'  # random, topk, topk_random, topk_per_node
 
     datasets = ['germany','gnnet-40']
     seeds = [20, 5, 1, 46, 77]
