@@ -2,7 +2,7 @@ import sys
 
 sys.path.append('../../')
 
-from core.run_exp.base_runner import *
+from core.run_scripts.base_runner import *
 
 warnings.simplefilter("ignore")
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -57,7 +57,6 @@ def exp_11(datasets, models, input_len):
 
 
 if __name__ == "__main__":
-
     input_len = 15
     # datasets = ['abilene', 'geant']
     datasets = ['germany', 'gnnet-40']
